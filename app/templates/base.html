@@ -1,0 +1,10 @@
+{% extend 'bootstrap/base.html' %}
+
+{% blcok styles %}
+{{ super () }}
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/index.css')}}">
+{% endblock %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
