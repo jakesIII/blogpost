@@ -5,4 +5,4 @@ from . import main
 def index():
 
     title="Welcome to thy blogpost"
-    return render_template('index.html' title=title)
+    return render_template('index.html', title=title)

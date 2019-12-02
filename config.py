@@ -3,7 +3,7 @@ import os
 class Config():
 
     QUOTES_BASE_URL=os.environ.get('QUOTES_BASE_URL')
-    UPLOADED_PHOTOS_DEST='app/static/photos'
+    
 
 class ProdConfig(Config):
 
