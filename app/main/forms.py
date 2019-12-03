@@ -8,8 +8,8 @@ class UpdateProfile(FlaskForm):
     submit = SubmitField('Submit')
 
 class NewBlogForm(FlaskForm):
-    title=TextAreaField('Your Post', validators=[Required()])
-    content=StringField('Talk to us', validators=[Required()])
+    title=StringField('Title', validators=[Required()])
+    content=TextAreaField('Post something', validators=[Required()])
     author=StringField('Your Name', validators=[Required()])
     submit =SubmitField('Submit')
 

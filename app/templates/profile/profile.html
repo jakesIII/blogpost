@@ -1,0 +1,72 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="container">
+<div class="row">
+
+  <!--Display profile photo-->
+  <div class="col-md-4">
+
+    {% if user.profile_pic_path %}
+    <img src="{{url_for('static',filename=user.avatar)}}" alt="" class="rounded-circle my-2 mb-2" height="200" width="200">
+    {%else%}
+    <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle my-2" height="200" width="200">
+    {% endif %}
+
+    {% if user == current_user %}
+   <form action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
+
+     <input type="file"  name="photo" class="form-control" required>
+     <input class="m-2" type="submit">
+   </form>
+     {% endif %}
+
+  </div>
+
+<!-- displaying  Username-->
+  <div class="col-md-4">
+    <h3> {{user.username| capitalize}} </h3>
+
+    <!--Displaying user bio-->
+    {% if user.bio %}
+      <p> {{user.bio}}</p>
+    {%else%}
+      <p> {{user.username| capitalize}} has no bio </p>
+    {% endif %}
+
+    {% if user == current_user %}
+        <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+    {% endif %}
+
+  </div>
+
+  <div class="container text-center">
+    <h3>Your Blogs </h3>
+
+    {% if posts %}
+     {% for post in posts %}
+      <div class="card">
+      <blockquote class="blockquote text-center">
+        <h4>{{blog.title}}</h4>
+
+        <p>{{blog.content}}</p>
+
+        <footer class="blockquote-footer"> {{blog.author}}</footer>
+
+      </blockquote>
+      </div>
+     {% endfor %}
+
+     {% else %}
+
+     <p>You don't have any posts yet.</p>
+
+     {% endif %}
+
+
+
+
+
+</div>
+</div>
+{% endblock %}

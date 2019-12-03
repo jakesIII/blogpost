@@ -11,7 +11,11 @@
     <h3 class="text-center" >Your Feed</h3>
     {% if blogs %}
       {% for blog in blogs %}
-
+        <div class="post-preview">      
+          <p>{{blog.title}}</p>
+          <p>{{blog.author}}</p>
+          <a href="#"><button class="btn btn-primary" type="button" name="button">Add Comment</button></a>
+        </div>
       {% endfor %}
     {% endif %}
   </div>
