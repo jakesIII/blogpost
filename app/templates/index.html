@@ -1,3 +1,20 @@
-{% extend 'base.html' %}
+{% extends 'base.html' %}
 
-<h1> Thy BlogPost </h1>
+{% block content %}
+<div class="container">
+  <blockquote class="text-center mt-4">
+    <h4>{{quote.quote}}</h4>
+    <footer>-<cite>{{quote.author}}</cite></footer>
+  </blockquote>
+  <a href="{{url_for('main.new_blogs')}}"><button class="btn btn-outline-primary" type="button" name="button">Add Blog Post</button></a>
+  <div class="">
+    <h3 class="text-center" >Your Feed</h3>
+    {% if blogs %}
+      {% for blog in blogs %}
+
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

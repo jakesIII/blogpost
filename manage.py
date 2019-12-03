@@ -5,9 +5,9 @@ from flask_migrate import Migrate, MigrateCommand
 # import instances
 app=create_app('development')
 manager=Manager(app)
-migrate=Migrate(app)
+migrate=Migrate(app, db)
 manager.add_command('db', MigrateCommand)
-manager.add_command('serve', Server)
+manager.add_command('server', Server)
 
 @manager.shell
 def make_shell_context():
@@ -15,4 +15,3 @@ def make_shell_context():
 
 if __name__=='__main__':
     manager.run()
-###you were working on the base html so you can extend it to auth templates broski then run the app
