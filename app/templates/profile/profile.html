@@ -43,17 +43,18 @@
   <div class="container text-center">
     <h3>Your Blogs </h3>
 
-    {% if posts %}
-     {% for post in posts %}
+    {% if blogs %}
+     {% for blog in blogs %}
       <div class="card">
       <blockquote class="blockquote text-center">
         <h4>{{blog.title}}</h4>
 
         <p>{{blog.content}}</p>
 
-        <footer class="blockquote-footer"> {{blog.author}}</footer>
+        <footer class="blockquote-footer">{{blog.author}}</footer>
 
       </blockquote>
+      <a href="#"><button type="button" name="button">Delete</button></a>
       </div>
      {% endfor %}
 

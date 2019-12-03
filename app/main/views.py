@@ -1,9 +1,10 @@
 from flask import render_template, request, redirect, url_for,abort
 from . import main
-from ..models import User, Blog, Quote
+from ..models import User, Blog, Comments, Quote
 from ..requests import get_quotes
 from flask_login import login_required
 from .forms import UpdateProfile, NewBlogForm, UpdateBlogForm, CommentForm
+from .. import db
 
 @main.route('/', methods=['GET'])
 def index():
@@ -38,3 +39,69 @@ def new_comment(blog_id):
         new_comment.save_comment()
         return redirect(url_for('main.index'))
     return render_template('comments.html', CommentForm=form)
+
+@main.route('/blog_comments/<int:blog_id>', methods=['GET'])
+def view_comments(blog_id):
+
+    comments=Comments.query.filter_by(blog_id=blog_id).all()
+
+    return render_template('view_comment.html', comments = comments)
+
+
+@main.route('/user/<uname>/update/pic', methods=['POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username=uname).first()
+    if 'photo' in request.files:
+        filename=photos.save(request.files['photo'])
+        path=f'photos/{filename}'
+        user.avatar= path
+        db.session.commit()
+    return redirect(url_for('main.profile', uname=uname))
+
+@main.route('/user/<uname>/update', methods=['GET', 'POST'])
+@login_required
+def update_profile(uname):
+
+    user = User.query.filter_by(username=uname).first()
+
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio=form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile', uname=user.username))
+
+    return render_template('profile/update.html', form=form)
+
+@main.route('/blog/delete/<int:id>')
+@login_required
+def delete(id):
+    blog=Blog.query.filter_by(id=Blog.id).first()
+    db.session.delete(blog)
+    db.session.commit()
+    return redirect(url_for('main.index'))
+    # return render_template('index.html')
+
+@main.route('/blog/<int:id>/update_blog', methods = ["POST", "GET"])
+@login_required
+def update_blog(id):
+    blog=Blog.query.filter_by(id=Blog.id).first()
+    # if blog is None:
+    #     abort(404)
+    form=UpdateBlogForm()
+    if form.validate_on_submit():
+        blog.content=form.content.data
+        blog.title=form.title.data
+
+        db.session.add(blog)
+        db.session.commit()
+
+        return redirect(url_for('main.index',id = id))
+    return render_template('update_blog.html', UpdateBlogForm = form)

@@ -1,0 +1,3 @@
+Hello {{user.username}}!!!
+A new post has just been uploaded!
+Head over to Thy Blog Post to check it out.

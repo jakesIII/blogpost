@@ -14,8 +14,8 @@ class NewBlogForm(FlaskForm):
     submit =SubmitField('Submit')
 
 class UpdateBlogForm(FlaskForm):
-    title=TextAreaField('Your Post', validators=[Required()])
-    content=StringField('Your Name', validators=[Required()])
+    title=StringField('Change your title', validators=[Required()])
+    content=TextAreaField('Change your content', validators=[Required()])
     submit =SubmitField('Submit')
 
 class CommentForm(FlaskForm):

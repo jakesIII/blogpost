@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     id=db.Column(db.Integer, primary_key=True)
     username=db.Column(db.String(255))
     email=db.Column(db.String(255), unique=True, index=True)
+    bio=db.Column(db.String(255))
     password_hash=db.Column(db.String(255))
     avatar=db.Column(db.String())
     blog=db.relationship('Blog', backref='user', lazy=True)
@@ -56,7 +57,7 @@ class Blog(db.Model):
         blogs=Blog.query.all()
         return blogs
     @classmethod
-    def get_user_blogs():
+    def get_user_blogs(cls, user_id):
         user_blogs=Blog.query.filter_by(user_id=user_id).all()
         return user_blogs
 
