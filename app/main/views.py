@@ -80,6 +80,7 @@ def update_profile(uname):
 
     return render_template('profile/update.html', form=form)
 
+# delete a whole blog
 @main.route('/blog/delete/<int:id>')
 @login_required
 def delete(id):
@@ -88,6 +89,15 @@ def delete(id):
     db.session.commit()
     return redirect(url_for('main.index'))
     # return render_template('index.html')
+
+# delete comment
+@main.route('/comments/delete/<int:id>')
+@login_required
+def delete(id):
+    comment=Comment.query.filter_by(id=Comment.id).first()
+    db.session.delete()
+    db.session.commit()
+    return redirect(url_for('main.index'))
 
 @main.route('/blog/<int:id>/update_blog', methods = ["POST", "GET"])
 @login_required
