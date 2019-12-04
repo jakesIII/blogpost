@@ -12,7 +12,7 @@
   <p>{{comment.comment}}</p>
   <footer class="blockquote-footer" >{{comment.user}}</footer>
 </blockquote>
-<button type="button" name="button"> Delete Comment </button>
+<a href="{{url_for('main.delete_comment', id=comment.id )}}"><button class="btn btn-danger" type="button" name="button"> Delete Comment </button></a>
 {% endfor %}
 {% endif %}
 
