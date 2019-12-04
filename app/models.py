@@ -72,7 +72,7 @@ class Comments(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_comments(cls, post_id):
+    def get_comments(cls,post_id):
         comments=Comments.query.filter_by(post_id).all()
         return comments
 
