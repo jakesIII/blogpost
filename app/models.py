@@ -25,7 +25,7 @@ class User(UserMixin, db.Model):
     # password hashing and verifying in one decorator
     @password.setter
     def password(self, password):
-        self.password_hash=generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
     # verify
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
