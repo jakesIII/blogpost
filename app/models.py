@@ -76,7 +76,7 @@ class Comments(db.Model):
         comments=Comments.query.filter_by(post_id).all()
         return comments
 
-    def delete_blog(self ):
+    def delete_comment(self):
         db.session.delete(self)
         db.session.commit
 
