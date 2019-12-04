@@ -76,6 +76,11 @@ class Comments(db.Model):
         comments=Comments.query.filter_by(post_id).all()
         return comments
 
+    def delete_blog(self ):
+        db.session.delete(self)
+        db.session.commit
+
+
 class Quote:
 
     def __init__(self, author, quote):
