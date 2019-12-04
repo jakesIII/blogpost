@@ -205,14 +205,15 @@ def delete(id):
     return redirect(url_for('main.index'))
     # return render_template('index.html')
 
-# delete comment
-@main.route('/comments/delete/<int:id>')
-@login_required
-def delete_comment(id):
-    comment=Comment.query.filter_by(id=Comment.id).first()
-    db.session.delete()
-    db.session.commit()
-    return redirect(url_for('main.view_comments'))
+# # delete comment
+# @main.route('/comments/delete/<int:id>')
+# @login_required
+# def delete_comment(id):
+#     comment=Comment.query.filter_by(id=Comment.id).first()
+#     db.session.delete()
+#     db.session.commit()
+#     return redirect(url_for('main.view_comments'))
+#     # return render_template('index.html')
 
 @main.route('/blog/<int:id>/update_blog', methods = ["POST", "GET"])
 @login_required
